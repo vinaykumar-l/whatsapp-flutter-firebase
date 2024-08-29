@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: theme,
       debugShowCheckedModeBanner: false,
       getPages: Routes.pages,
-      initialRoute: RouteNames.home,
+      initialRoute: RouteNames.login,
     );
   }
 }
