@@ -8,6 +8,10 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final TextEditingController emailController = TextEditingController(text: "");
+  final TextEditingController passwordController =
+      TextEditingController(text: "");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,11 +21,11 @@ class _LoginState extends State<Login> {
           height: 130,
         ),
         Image.asset(
-          "assets/banner.png",
+          "assets/thread.png",
           height: 100,
         ),
-        Text(
-          "Crée ton compte avec ton\nadresse e-mail",
+        const Text(
+          "Welcome Back,\n Login with your registered email and password",
           style: TextStyle(
               color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
           textAlign: TextAlign.center,
@@ -30,7 +34,7 @@ class _LoginState extends State<Login> {
           height: 30,
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
               _entryFeild('Enter email'),
@@ -45,9 +49,7 @@ class _LoginState extends State<Login> {
     );
   }
 
-  Widget _entryFeild(
-    String hint,
-  ) {
+  Widget _entryFeild(String hint) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 15),
       child: TextField(
@@ -57,35 +59,35 @@ class _LoginState extends State<Login> {
           fontWeight: FontWeight.normal,
         ),
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(0.0),
+          contentPadding: const EdgeInsets.all(0.0),
           labelText: hint,
           hintText: hint,
-          labelStyle: TextStyle(
+          labelStyle: const TextStyle(
             color: Colors.white,
             fontSize: 14.0,
             fontWeight: FontWeight.w400,
           ),
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             color: Colors.white,
             fontSize: 14.0,
           ),
-          prefixIcon: Icon(
+          prefixIcon: const Icon(
             Icons.supervised_user_circle,
             color: Colors.white,
             size: 18,
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
+            borderSide: const BorderSide(
                 color: Color.fromARGB(255, 163, 163, 163), width: 1.5),
             borderRadius: BorderRadius.circular(10.0),
           ),
-          floatingLabelStyle: TextStyle(
+          floatingLabelStyle: const TextStyle(
             color: Colors.white,
             fontSize: 18.0,
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: Color.fromARGB(255, 61, 61, 61), width: 1.5),
+            borderSide: const BorderSide(
+                color: Color.fromARGB(255, 61, 61, 61), width: 1.5),
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),
