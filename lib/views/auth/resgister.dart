@@ -1,8 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/route_manager.dart';
 import 'package:threads/routes/route_names.dart';
+import 'package:threads/utils/type_def.dart';
 import 'package:threads/widgets/auth_input.dart';
 
 class Register extends StatefulWidget {
@@ -20,6 +22,13 @@ class _RegisterState extends State<Register> {
   final TextEditingController passwordController =
       TextEditingController(text: "");
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
+
+// method to submit the form
+  void submit() {
+    if (_form.currentState!.validate()) {
+      print("submitted");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +69,24 @@ class _RegisterState extends State<Register> {
                   height: 10,
                 ),
                 AuthInput(
+                  hintText: "Enter your name",
+                  label: "Name",
+                  controller: nameController,
+                  validatorCallback: ValidationBuilder()
+                      .required()
+                      .minLength(4)
+                      .maxLength(30)
+                      .build(),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                AuthInput(
                   hintText: "Enter your email",
                   label: "Email",
                   controller: emailController,
+                  validatorCallback:
+                      ValidationBuilder().required().email().build(),
                 ),
                 const SizedBox(
                   height: 20,
@@ -72,19 +96,31 @@ class _RegisterState extends State<Register> {
                   label: "Password",
                   controller: passwordController,
                   isPasswordField: true,
+                  validatorCallback: ValidationBuilder()
+                      .required()
+                      .minLength(8)
+                      .maxLength(30)
+                      .build(),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 AuthInput(
-                  hintText: "Enter your password",
-                  label: "Password",
-                  controller: passwordController,
+                  hintText: "Confirm your password",
+                  label: "Confirm Password",
+                  controller: confirmPasswordController,
                   isPasswordField: true,
+                  validatorCallback: (args) {
+                    if (passwordController != args) {
+                      return "Password not matched";
+                    } else {
+                      return null;
+                    }
+                  },
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                    onPressed: () {},
+                    onPressed: submit,
                     style: ButtonStyle(
                         minimumSize:
                             WidgetStateProperty.all(const Size.fromHeight(40))),
@@ -92,13 +128,13 @@ class _RegisterState extends State<Register> {
                 const SizedBox(height: 20),
                 Text.rich(TextSpan(children: [
                   TextSpan(
-                      text: " Sign up",
+                      text: " login ",
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                       recognizer: TapGestureRecognizer()
-                        ..onTap = () => Get.toNamed(RouteNames.register)),
-                ], text: "Don't have an account ?"))
+                        ..onTap = () => Get.toNamed(RouteNames.login)),
+                ], text: "Already have an account ?"))
               ],
             ),
           ),

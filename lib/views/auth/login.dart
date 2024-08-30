@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:threads/routes/route_names.dart';
 import 'package:threads/widgets/auth_input.dart';
@@ -16,6 +17,13 @@ class _LoginState extends State<Login> {
   final TextEditingController passwordController =
       TextEditingController(text: "");
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
+
+// method to submit the form
+  void submit() {
+    if (_form.currentState!.validate()) {
+      print("submitted");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +67,8 @@ class _LoginState extends State<Login> {
                   hintText: "Enter your email",
                   label: "Email",
                   controller: emailController,
+                  validatorCallback:
+                      ValidationBuilder().required().email().build(),
                 ),
                 const SizedBox(
                   height: 20,
@@ -68,12 +78,17 @@ class _LoginState extends State<Login> {
                   label: "Password",
                   controller: passwordController,
                   isPasswordField: true,
+                  validatorCallback: ValidationBuilder()
+                      .required()
+                      .minLength(8)
+                      .maxLength(30)
+                      .build(),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(
-                    onPressed: () {},
+                    onPressed: submit,
                     style: ButtonStyle(
                         minimumSize:
                             WidgetStateProperty.all(const Size.fromHeight(40))),

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:threads/utils/type_def.dart';
 
 class AuthInput extends StatelessWidget {
   final String hintText, label;
   final TextEditingController controller;
   final bool isPasswordField;
+  final ValidatorCallback validatorCallback;
   const AuthInput({
+    required this.validatorCallback,
     required this.hintText,
     required this.label,
     required this.controller,
@@ -15,6 +18,7 @@ class AuthInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: validatorCallback,
       controller: controller,
       obscureText: isPasswordField,
       decoration: InputDecoration(
