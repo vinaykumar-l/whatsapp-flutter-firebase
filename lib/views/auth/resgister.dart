@@ -1,18 +1,22 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/route_manager.dart';
 import 'package:threads/routes/route_names.dart';
 import 'package:threads/widgets/auth_input.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Register extends StatefulWidget {
+  const Register({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
+class _RegisterState extends State<Register> {
   final TextEditingController emailController = TextEditingController(text: "");
+  final TextEditingController nameController = TextEditingController(text: "");
+  final TextEditingController confirmPasswordController =
+      TextEditingController(text: "");
   final TextEditingController passwordController =
       TextEditingController(text: "");
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
@@ -42,13 +46,13 @@ class _LoginState extends State<Login> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Login",
+                        "Register Account",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 25,
                         ),
                       ),
-                      Text("Welcome back,"),
+                      Text("join the community of threads!!!"),
                     ],
                   ),
                 ),
@@ -72,6 +76,13 @@ class _LoginState extends State<Login> {
                 const SizedBox(
                   height: 20,
                 ),
+                AuthInput(
+                  hintText: "Enter your password",
+                  label: "Password",
+                  controller: passwordController,
+                  isPasswordField: true,
+                ),
+                const SizedBox(height: 20),
                 ElevatedButton(
                     onPressed: () {},
                     style: ButtonStyle(
